@@ -1,0 +1,72 @@
+<div class="hero">
+  <div class="hero-body">
+    <h1>Welcome!</h1>
+    <p>Hi and welcome to my portfolio website! I created this website
+      in order to have a place where I can show my</br>work within graphic design. I
+      hope you like it and find it inspiring. Feel free to leave a comment in my
+      guestbook!</p>
+  </div>
+</div>
+<h3>Guestbook</h3>
+{{#if guestbooks.length}}
+  <ul>
+    <div class="container-guestbook">
+      {{#each guestbooks}}
+        <div class="item-guestbook">
+          <div class="item-card-header">
+            <p><strong>{{name}}</strong> ({{date}})</p>
+            {{#if ../isLoggedIn}}
+              <div>
+                <a href ="/update-guestbook/{{id}}"><button
+                    class="btn btn-link icon icon-edit"
+                  ></button></a>
+                <form action="/delete-guestbook/{{id}}" method="POST">
+                  <button class="btn btn-link icon icon-delete text-error"></button>
+                </form>
+              </div>
+            {{/if}}
+          </div>
+          <p>{{comment}}</p>
+          <p><em>{{answer}}</em></p>
+        </div>
+      {{/each}}
+    </div>
+  </ul>
+{{else if serverError.length}}
+  <p>Couldn't fetch the guestbook posts because:</p>
+  <ul>
+    {{#each serverError}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>No comments.</p>
+{{/if}}
+{{#if errorMessages.length}}
+  <p>Could not post the comment because:</p>
+  <ul>
+    {{#each errorMessages}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
+{{#unless serverError.length}}
+  <div class="container-forms">
+    <form action="/" method="post">
+      <div class="form-group">
+        <label class="form-label">Leave a comment:</label>
+        <input class="form-input" type="text" name="name" placeholder="name" value="{{name}}" />
+      </div>
+      <div class="form-group">
+        <input
+          class="form-input"
+          type="text"
+          name="comment"
+          placeholder="comment"
+          value = "{{comment}}"
+        />
+      </div>
+      <input class="bg-dark" type="submit" value="Create" />
+    </form>
+  </div>
+{{/unless}}

@@ -1,0 +1,54 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Caroline's Portfolio</title>
+    <link rel="stylesheet" href="/layout.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/spectre.css/dist/spectre.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css"
+    />
+  </head>
+  <body>
+    <header class="navbar">
+      <section class="navbar-section">
+        <a href="/" class="navbar-brand mr-2 text-dark"><strong>Caroline's Portfolio</strong></a>
+      </section>
+      <section class="navbar-center">
+        <a href="/projects" class="btn btn-link text-dark">Projects</a>
+        <a href="/about" class="btn btn-link text-dark">About</a>
+        <a href="/contact" class="btn btn-link text-dark">Contact</a>
+      </section>
+      <section class="navbar-section">
+        <div class="input-group input-inline">
+          {{#unless isLoggedIn}}
+            <button class="bg-dark"><a class ="text-light" href="/login">Log In</a></button>
+          {{/unless}}
+          {{#if isLoggedIn}}
+            <form action="/logout" method="post">
+              <button class="bg-dark">Log Out</button>
+            </form>
+          {{/if}}
+        </div>
+      </section>
+    </header>
+    <main>
+      {{{body}}}
+    </main>
+    <footer class="bg-dark">
+      <p><strong>Caroline's Portfolio</strong><p>
+      <p><i class="icon icon-location"></i> Jönköping, Sweden</p>
+      <p><i class="icon icon-mail"></i> caroline.f@hotmail.se</p>
+      <p class="text-gray">Copyright - All rights reserved Caroline Frössling</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+{{#if project}}
+  {{#if ../errorMessages.length}}
+    <p>Could not log in because:</p>
+    <ul>
+      {{#each errorMessages}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+  <div class="container-specific-project">
+    <h3>{{project.title}}</h3>
+    <img src="/projects-image.png" />
+    <p>{{project.description}}</p>
+    <p>Caroline Frössling ({{project.date}})</p>
+  </div>
+{{else if serverError.length}}
+  <p>Couldn't fetch the project because:</p>
+  <ul>
+    {{#each serverError}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>The project does not exist.</p>
+{{/if}}

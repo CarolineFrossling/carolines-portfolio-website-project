@@ -1,0 +1,37 @@
+<h3>My Projects</h3>
+{{#unless serverError.length}}
+  {{#if isLoggedIn}}
+    <a class="text-dark" href="/create-project"><p><strong>Create New Project +</strong></p></a>
+  {{/if}}
+{{/unless}}
+{{#if projects.length}}
+  <ul>
+    <div class="container-projects">
+      {{#each projects}}
+        <div>
+          {{#if ../isLoggedIn}}
+            <a href="/update-project/{{id}}"><button
+                class="btn btn-link icon icon-edit"
+              ></button></a>
+            <form action="/delete-project/{{id}}" method="POST">
+              <button class="btn btn-link icon icon-delete text-error"></button>
+            </form>
+          {{/if}}
+          <a class="text-dark" href="/projects/{{id}}">
+            <img class="projects-images" src="projects-image.png" />
+            <p><strong>{{title}}</strong></p>
+          </a>
+        </div>
+      {{/each}}
+    </div>
+  </ul>
+{{else if serverError.length}}
+  <p>Couldn't fetch the projects because:</p>
+  <ul>
+    {{#each serverError}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>No projects exist.</p>
+{{/if}}

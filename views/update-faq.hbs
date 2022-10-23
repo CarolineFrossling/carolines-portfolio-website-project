@@ -1,0 +1,38 @@
+<div class="hero">
+  <div class="hero-body">
+    <h1>Update FAQ</h1>
+    {{#if errorMessages.length}}
+      <p>Could not update the FAQ because:</p>
+      <ul>
+        {{#each errorMessages}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    {{else if serverError.length}}
+      <p>Couldn't fetch the FAQ because:</p>
+      <ul>
+        {{#each serverError}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    {{/if}}
+    {{#unless serverError.length}}
+      <div class="container-forms">
+        <form method="post">
+          <div class="form-group">
+            <label class="form-label">Create or update an answer to the FAQ
+              post:</label>
+            <input
+              class="form-input"
+              type="text"
+              name="answer"
+              placeholder="answer"
+              value="{{faq.answer}}"
+            />
+          </div>
+          <input class="bg-dark" type="submit" value="Update" />
+        </form>
+      </div>
+    {{/unless}}
+  </div>
+</div>

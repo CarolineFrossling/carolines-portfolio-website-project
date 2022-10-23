@@ -1,0 +1,68 @@
+<div class="hero">
+  <div class="hero-body">
+    <h1>About My Portfolio</h1>
+    <p>My portfolio is all about showing you my work! I created this website in
+      order to gather all of my work in one single</br>place and share it with the
+      whole world. I hope you will find inspiration here. Feel free to ask any
+      questions you might have!</p>
+  </div>
+</div>
+<h3>Frequently Asked Questions</h3>
+{{#if faqs.length}}
+  <ul>
+    <div class="container-faq">
+      {{#each faqs}}
+        <div class="item-faq">
+          <div class="item-card-header">
+            <p><strong>{{question}}</strong></p>
+            {{#if ../isLoggedIn}}
+              <div>
+                <a href ="/update-faq/{{id}}"><button
+                  class="btn btn-link icon icon-edit"
+                ></button></a>
+                <form action="/delete-faq/{{id}}" method="POST">
+                  <button class="btn btn-link icon icon-delete text-error"></button>
+                </form>
+              </div>
+            {{/if}}
+          </div>
+          <p>{{answer}}</p>
+        </div>
+      {{/each}}
+    </div>
+  </ul>
+{{else if serverError.length}}
+  <p>Couldn't fetch the FAQ entries because:</p>
+  <ul>
+    {{#each serverError}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>No questions exist.</p>
+{{/if}}
+{{#if errorMessages.length}}
+  <p>Could not post the question because:</p>
+  <ul>
+    {{#each errorMessages}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
+{{#unless serverError.length}}
+  <div class="container-forms">
+    <form action="/about" method="post">
+      <div class="form-group">
+        <label class="form-label">Ask a question:</label>
+        <input
+          class="form-input"
+          type="text"
+          name="question"
+          placeholder="question"
+          value="{{question}}"
+        />
+      </div>
+      <input class="bg-dark" type="submit" value="Create" />
+    </form>
+  </div>
+{{/unless}}
